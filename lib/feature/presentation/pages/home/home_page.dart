@@ -9,6 +9,7 @@ import 'package:flutter_news_app/dependency_injection.dart';
 import 'package:flutter_news_app/feature/data/model/category_news_model.dart';
 import 'package:flutter_news_app/feature/data/model/response_model/top_headline_response_model.dart';
 import 'package:flutter_news_app/feature/presentation/bloc/bloc.dart';
+import 'package:flutter_news_app/feature/presentation/pages/search/news_search.dart';
 import 'package:flutter_news_app/feature/presentation/pages/widget/widget_failure_message.dart';
 import 'package:flutter_news_app/feature/presentation/pages/widget/widget_item_news.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -116,11 +117,11 @@ class _HomePageState extends State<HomePage> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //       builder: (context) => SearchPage()),
-                                // );
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => SearchPage()),
+                                );
                               },
                               child: Hero(
                                 tag: 'iconSearch',

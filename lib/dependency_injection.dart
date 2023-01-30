@@ -4,6 +4,7 @@ import 'package:flutter_news_app/config/hive_constants.dart';
 import 'package:flutter_news_app/feature/data/datasource/news_remote_data_source.dart';
 import 'package:flutter_news_app/feature/data/repository/news_repository.dart';
 import 'package:flutter_news_app/feature/domain/usecase/get_top_headline/get_top_headline.dart';
+import 'package:flutter_news_app/feature/domain/usecase/search_top_headline/search_top_headline.dart';
 import 'package:flutter_news_app/feature/presentation/bloc/top_headline_bloc.dart';
 import 'package:get_it/get_it.dart';
 
@@ -20,13 +21,15 @@ class DependencyInjector {
     serviceLocator.registerFactory(
       () => TopHeadlinesNewsBloc(
         getTopHeadlinesNews: serviceLocator(),
-        // searchTopHeadlinesNews: serviceLocator(),
+        searchTopHeadlinesNews: serviceLocator(),
       ),
     );
 
     /// Inject the usecases
     serviceLocator.registerLazySingleton(
         () => GetTopHeadlinesNews(newsRepository: serviceLocator()));
+    serviceLocator.registerLazySingleton(
+        () => SearchTopHeadlinesNews(newsRepository: serviceLocator()));
 
     /// Inject the networkinfo class for handling all network information
     serviceLocator.registerLazySingleton<NewsRepository>(() =>

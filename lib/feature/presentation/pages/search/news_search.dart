@@ -66,9 +66,9 @@ class _SearchPageState extends State<SearchPage> {
                 horizontal: 10.w,
               ),
               child: Column(
-                children: <Widget>[
+                children: [
                   Row(
-                    children: <Widget>[
+                    children: [
                       GestureDetector(
                         onTap: () {
                           Navigator.pop(context);
@@ -84,11 +84,11 @@ class _SearchPageState extends State<SearchPage> {
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(99.0),
+                            borderRadius: BorderRadius.circular(20.r),
                           ),
                           padding: EdgeInsets.symmetric(horizontal: 15.w),
                           child: Row(
-                            children: <Widget>[
+                            children: [
                               Expanded(
                                 child: TextField(
                                   controller: controllerKeyword,

@@ -19,12 +19,12 @@ class WidgetFailureMessage extends StatelessWidget {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: <Widget>[
-        // SvgPicture.asset(
-        //   'assets/svg/undraw_newspaper.svg',
-        //   width: ScreenUtil().scaleWidth / 3,
-        //   height: ScreenUtil().scaleHeight / 3,
-        // ),
+      children: [
+        SvgPicture.asset(
+          'assets/svg/undraw_newspaper.svg',
+          width: ScreenUtil().screenWidth / 3,
+          height: ScreenUtil().screenHeight / 3,
+        ),
         SizedBox(height: 24.h),
         Text(
           errorTitle,

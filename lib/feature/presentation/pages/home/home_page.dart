@@ -100,13 +100,13 @@ class _HomePageState extends State<HomePage> {
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      WidgetDateToday(),
+                    children: [
+                      const WidgetDateToday(),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 48.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: <Widget>[
+                          children: [
                             Expanded(
                               child: Text(
                                 'Daily News',
@@ -190,14 +190,14 @@ class _HomePageState extends State<HomePage> {
           );
         }
         return Stack(
-          children: <Widget>[
+          children: [
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 48.w),
               child: CustomScrollView(
                 physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics(),
                 ),
-                slivers: <Widget>[
+                slivers: [
                   CupertinoSliverRefreshControl(
                     onRefresh: () async {
                       topHeadlinesNewsBloc.add(
@@ -249,7 +249,7 @@ class _HomePageState extends State<HomePage> {
           listArticles.addAll(state.listArticles);
         }
         return Stack(
-          children: <Widget>[
+          children: [
             RefreshIndicator(
               key: refreshIndicatorState,
               onRefresh: () async {
@@ -293,7 +293,7 @@ class _HomePageState extends State<HomePage> {
     return Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
+        children: [
           const WidgetFailureMessage(),
           TextButton(
             onPressed: () {
@@ -371,7 +371,7 @@ class _HomePageState extends State<HomePage> {
           ),
         ),
         child: Stack(
-          children: <Widget>[
+          children: [
             Container(
               width: double.infinity,
               height: ScreenUtil().screenHeight / 1.7,
@@ -394,7 +394,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
+                children: [
                   Container(
                     decoration: BoxDecoration(
                       color: Colors.pink,
@@ -428,7 +428,7 @@ class _HomePageState extends State<HomePage> {
                     padding: EdgeInsets.only(left: 10.w),
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
-                      children: <Widget>[
+                      children: [
                         Text(
                           strPublishedAt,
                           style: TextStyle(

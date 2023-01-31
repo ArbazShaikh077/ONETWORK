@@ -79,7 +79,7 @@ class WidgetItemNews extends StatelessWidget {
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
+                  children: [
                     SizedBox(
                       height: 10.h,
                     ),

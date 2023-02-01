@@ -69,6 +69,7 @@ class _HomePageState extends State<HomePage> {
     ScreenUtil.init(context);
     return Scaffold(
       // floatingActionButton: FloatingActionButton(onPressed: () {}),
+      backgroundColor: Colors.black87,
       body: BlocProvider<TopHeadlinesNewsBloc>(
         create: (context) => topHeadlinesNewsBloc,
         child: BlocListener<TopHeadlinesNewsBloc, TopHeadlinesState>(
@@ -101,9 +102,9 @@ class _HomePageState extends State<HomePage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const WidgetDateToday(),
+                      // const WidgetDateToday(),
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 48.w),
+                        padding: EdgeInsets.symmetric(horizontal: 20.w),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -112,6 +113,7 @@ class _HomePageState extends State<HomePage> {
                                 'Daily News',
                                 style: TextStyle(
                                   fontSize: 18.sp,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -128,6 +130,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Icon(
                                   Icons.search,
                                   size: 20.h,
+                                  color: Colors.white,
                                 ),
                               ),
                             ),
@@ -144,6 +147,7 @@ class _HomePageState extends State<HomePage> {
                               child: Icon(
                                 Icons.settings,
                                 size: 20.h,
+                                color: Colors.white,
                               ),
                             ),
                           ],

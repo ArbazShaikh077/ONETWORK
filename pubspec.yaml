@@ -59,7 +59,7 @@ dependencies:
   url_launcher: ^6.1.8
 
   #For fomartting dates and numbers
-  intl: ^0.18.0
+  intl: ^0.17.0
 
   #For rendering the svg on flutter
   flutter_svg: ^1.1.6
@@ -75,6 +75,9 @@ dependencies:
 
   #For getting the dynamic color from wallpaper
   dynamic_color: ^1.5.4
+
+  #For converting the time format
+  timeago: ^3.3.0
 
 dev_dependencies:
   flutter_test:

@@ -22,5 +22,5 @@ void main() async {
   await DependencyInjector.init();
 
   ///Main line for executing the flutter application
-  runApp(const OneNetwork());
+  runApp(OneNetwork());
 }

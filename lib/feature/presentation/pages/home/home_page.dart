@@ -12,6 +12,7 @@ import 'package:flutter_news_app/feature/presentation/bloc/bloc.dart';
 import 'package:flutter_news_app/feature/presentation/pages/search/news_search.dart';
 import 'package:flutter_news_app/feature/presentation/pages/widget/widget_failure_message.dart';
 import 'package:flutter_news_app/feature/presentation/pages/widget/widget_item_news.dart';
+import 'package:flutter_news_app/onetwork.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
@@ -69,7 +70,7 @@ class _HomePageState extends State<HomePage> {
     ScreenUtil.init(context);
     return Scaffold(
       // floatingActionButton: FloatingActionButton(onPressed: () {}),
-      backgroundColor: Colors.black87,
+      backgroundColor: Theme.of(context).extension<CustomColors>()!.danger,
       body: BlocProvider<TopHeadlinesNewsBloc>(
         create: (context) => topHeadlinesNewsBloc,
         child: BlocListener<TopHeadlinesNewsBloc, TopHeadlinesState>(

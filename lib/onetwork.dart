@@ -1,4 +1,5 @@
 import 'package:dynamic_color/dynamic_color.dart';
+import 'package:flex_color_scheme/flex_color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/config/app_constants.dart';
 import 'package:flutter_news_app/config/hive_constants.dart';
@@ -41,7 +42,7 @@ class OneNetwork extends StatelessWidget {
 // Fictitious brand color.
   final _brandBlue = const Color(0xFF1E88E5);
 
-  CustomColors lightCustomColors = const CustomColors(danger: Colors.green);
+  CustomColors lightCustomColors = const CustomColors(danger: Colors.amber);
   CustomColors darkCustomColors = const CustomColors(danger: Color(0xFFEF9A9A));
   @override
   Widget build(BuildContext context) {
@@ -82,15 +83,12 @@ class OneNetwork extends StatelessWidget {
           return MaterialApp(
             debugShowCheckedModeBanner: false,
             title: AppConstants.appName,
-            theme: ThemeData(
-              colorScheme: lightColorScheme,
-              extensions: [lightCustomColors],
-            ),
-            darkTheme: ThemeData(
-              colorScheme: darkColorScheme,
-              extensions: [darkCustomColors],
-            ),
-            themeMode: ThemeMode.light,
+            // The Mandy red, light theme.
+            theme: FlexThemeData.light(scheme: FlexScheme.materialBaseline),
+            // The Mandy red, dark theme.
+            darkTheme: FlexThemeData.dark(scheme: FlexScheme.mandyRed),
+            // Use dark or light theme based on system setting.
+            themeMode: ThemeMode.system,
             home: const HomePage(),
           );
         },

@@ -79,6 +79,12 @@ dependencies:
   #For converting the time format
   timeago: ^3.3.0
 
+  #For generating the dynamic colors with single color
+  flex_color_scheme: ^6.1.2
+
+  #For adding custom effect of pull to refresh
+  liquid_pull_to_refresh: ^3.0.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

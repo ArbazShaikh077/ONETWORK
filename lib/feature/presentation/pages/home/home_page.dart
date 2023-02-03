@@ -16,6 +16,7 @@ import 'package:flutter_news_app/onetwork.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:intl/intl.dart';
+import 'package:liquid_pull_to_refresh/liquid_pull_to_refresh.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
@@ -68,107 +69,140 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     ScreenUtil.init(context);
-    return Scaffold(
-      // floatingActionButton: FloatingActionButton(onPressed: () {}),
-      backgroundColor: Theme.of(context).extension<CustomColors>()!.danger,
-      body: BlocProvider<TopHeadlinesNewsBloc>(
-        create: (context) => topHeadlinesNewsBloc,
-        child: BlocListener<TopHeadlinesNewsBloc, TopHeadlinesState>(
-          listener: (context, state) {
-            if (state is FailureHeadlineState) {
-              _resetRefreshIndicator();
-            } else if (state is LoadedHeadlineState) {
-              _resetRefreshIndicator();
-            } else if (state is ChangeCategoryHeadlineState) {
-              indexCategorySelected = state.indexCategorySelected;
-              if (Platform.isIOS) {
-                isLoadingCenterIOS = true;
-                var category =
-                    listCategories[indexCategorySelected].title.toLowerCase();
-                topHeadlinesNewsBloc.add(LoadHeadLineEvent(category: category));
-              } else {
-                refreshIndicatorState.currentState?.show();
-              }
-            }
-          },
-          child: Stack(
+    return DefaultTabController(
+      length: listCategories.length,
+      child: Scaffold(
+        // floatingActionButton: FloatingActionButton(onPressed: () {}),
+        appBar: AppBar(
+          flexibleSpace: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SafeArea(
-                child: Container(
-                  width: double.infinity,
-                  // color: isDarkMode ? null : Color(0xFFEFF5F5),
-                  padding: EdgeInsets.symmetric(
-                    vertical: 24.h,
+              SizedBox(
+                height: 20.h,
+              ),
+              Expanded(
+                child: TabBar(
+                  isScrollable: true,
+                  tabs: List.generate(
+                    listCategories.length,
+                    (index) => Tab(
+                      text: listCategories[index].title,
+                    ),
                   ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      // const WidgetDateToday(),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 20.w),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Text(
-                                'Daily News',
-                                style: TextStyle(
-                                  fontSize: 18.sp,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => SearchPage()),
-                                );
-                              },
-                              child: Hero(
-                                tag: 'iconSearch',
-                                child: Icon(
-                                  Icons.search,
-                                  size: 20.h,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            ),
-                            SizedBox(width: 10.w),
-                            GestureDetector(
-                              onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) => SettingsPage(),
-                                //   ),
-                                // );
-                              },
-                              child: Icon(
-                                Icons.settings,
-                                size: 20.h,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 24.h),
-                      WidgetCategoryNews(
-                          listCategories: listCategories,
-                          indexDefaultSelected: indexCategorySelected),
-                      SizedBox(height: 24.h),
-                      Expanded(
-                        child: Platform.isIOS
-                            ? _buildWidgetContentNewsIOS()
-                            : _buildWidgetContentNewsAndroid(),
-                      ),
-                    ],
-                  ),
+                  onTap: (index) {
+                    if (indexCategorySelected == index) {
+                      return;
+                    }
+                    indexCategorySelected = index;
+
+                    topHeadlinesNewsBloc.add(
+                      ChangeCategoryEvent(indexCategorySelected: index),
+                    );
+                  },
                 ),
               ),
             ],
+          ), // TabBar
+        ), // AppBar
+        backgroundColor: Colors.black,
+        body: BlocProvider<TopHeadlinesNewsBloc>(
+          create: (context) => topHeadlinesNewsBloc,
+          child: BlocListener<TopHeadlinesNewsBloc, TopHeadlinesState>(
+            listener: (context, state) {
+              if (state is FailureHeadlineState) {
+                _resetRefreshIndicator();
+              } else if (state is LoadedHeadlineState) {
+                _resetRefreshIndicator();
+              } else if (state is ChangeCategoryHeadlineState) {
+                indexCategorySelected = state.indexCategorySelected;
+                if (Platform.isIOS) {
+                  isLoadingCenterIOS = true;
+                  var category =
+                      listCategories[indexCategorySelected].title.toLowerCase();
+                  topHeadlinesNewsBloc
+                      .add(LoadHeadLineEvent(category: category));
+                } else {
+                  refreshIndicatorState.currentState?.show();
+                }
+              }
+            },
+            child: Platform.isIOS
+                ? _buildWidgetContentNewsIOS()
+                : _buildWidgetContentNewsAndroid(),
+            //                 Stack(
+            //   children: [
+            //     Container(
+            //       width: double.infinity,
+            //       // color: isDarkMode ? null : Color(0xFFEFF5F5),
+            //       padding: EdgeInsets.symmetric(
+            //         vertical: 24.h,
+            //       ),
+            //       child: Column(
+            //         crossAxisAlignment: CrossAxisAlignment.start,
+            //         children: [
+            //           Padding(
+            //             padding: EdgeInsets.symmetric(horizontal: 20.w),
+            //             child: Row(
+            //               mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            //               children: [
+            //                 Expanded(
+            //                   child: Text(
+            //                     'Daily News',
+            //                     style: TextStyle(
+            //                       fontSize: 18.sp,
+            //                       color: Colors.white,
+            //                     ),
+            //                   ),
+            //                 ),
+            //                 GestureDetector(
+            //                   onTap: () {
+            //                     Navigator.push(
+            //                       context,
+            //                       MaterialPageRoute(
+            //                           builder: (context) => SearchPage()),
+            //                     );
+            //                   },
+            //                   child: Hero(
+            //                     tag: 'iconSearch',
+            //                     child: Icon(
+            //                       Icons.search,
+            //                       size: 20.h,
+            //                       color: Colors.white,
+            //                     ),
+            //                   ),
+            //                 ),
+            //                 SizedBox(width: 10.w),
+            //                 GestureDetector(
+            //                   onTap: () {
+            //                     // Navigator.push(
+            //                     //   context,
+            //                     //   MaterialPageRoute(
+            //                     //     builder: (context) => SettingsPage(),
+            //                     //   ),
+            //                     // );
+            //                   },
+            //                   child: Icon(
+            //                     Icons.settings,
+            //                     size: 20.h,
+            //                     color: Colors.white,
+            //                   ),
+            //                 ),
+            //               ],
+            //             ),
+            //           ),
+            //           // SizedBox(height: 24.h),
+            //           // WidgetCategoryNews(
+            //           //     listCategories: listCategories,
+            //           //     indexDefaultSelected: indexCategorySelected),
+            //           // SizedBox(height: 24.h),
+            //           Expanded(
+            //             child:
+            //           ),
+            //         ],
+            //       ),
+            //     ),
+            //   ],
+            // ),
           ),
         ),
       ),
@@ -267,7 +301,7 @@ class _HomePageState extends State<HomePage> {
                 completerRefresh?.future;
               },
               child: ListView.builder(
-                padding: EdgeInsets.symmetric(horizontal: 18.w),
+                padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 10.h),
                 itemBuilder: (context, index) {
                   var itemArticle = listArticles[index];
                   var dateTimePublishedAt = DateFormat('yyyy-MM-ddTHH:mm:ssZ')

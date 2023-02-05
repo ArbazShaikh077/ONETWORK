@@ -3,14 +3,13 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class WidgetFailureMessage extends StatelessWidget {
-  final String errorTitle;
-  final String errorSubtitle;
+  final String? errorTitle;
+  final String? errorSubtitle;
 
   const WidgetFailureMessage({
     super.key,
-    this.errorTitle = 'You seem to be offline',
-    this.errorSubtitle =
-        'Check your wi-fi connection or cellular data \nand try again.',
+    this.errorTitle,
+    this.errorSubtitle,
   });
 
   @override
@@ -27,18 +26,18 @@ class WidgetFailureMessage extends StatelessWidget {
         ),
         SizedBox(height: 24.h),
         Text(
-          errorTitle,
+          errorTitle ?? "Something went wrong",
           style: TextStyle(
-            fontSize: 48.sp,
+            fontSize: 20.sp,
             fontWeight: FontWeight.w500,
+            color: Colors.white,
           ),
           textAlign: TextAlign.center,
         ),
         Text(
-          errorSubtitle,
-          style: TextStyle(
-            fontSize: 36.sp,
-          ),
+          errorSubtitle ??
+              "Check your wi-fi connection or cellular data \nand try again.",
+          style: TextStyle(fontSize: 18.sp, color: Colors.white),
           textAlign: TextAlign.center,
         )
       ],

@@ -1,11 +1,10 @@
 import 'dart:ui';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:dynamic_color/dynamic_color.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_news_app/feature/data/model/response_model/top_headline_response_model.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:url_launcher/url_launcher.dart';
+import 'package:shimmer/shimmer.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
@@ -54,13 +53,20 @@ class WidgetItemNews extends StatelessWidget {
                   );
                 },
                 placeholder: (context, url) {
-                  return ClipRRect(
-                    borderRadius: BorderRadius.circular(8.0),
-                    child: Image.asset(
-                      'assets/images/img_placeholder.jpg',
-                      fit: BoxFit.cover,
-                      width: double.infinity,
-                      height: 200.h,
+                  return Shimmer.fromColors(
+                    baseColor: Colors.white10,
+                    highlightColor: Theme.of(context)
+                            .appBarTheme
+                            .backgroundColor
+                            ?.withOpacity(0.5) ??
+                        Colors.black,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(8.0),
+                      child: Container(
+                        width: double.infinity,
+                        height: 200.h,
+                        color: Colors.red,
+                      ),
                     ),
                   );
                 },
@@ -92,99 +98,6 @@ class WidgetItemNews extends StatelessWidget {
               thickness: 0.8.h,
             ),
           ],
-        )
-        // SizedBox(
-        //   height: 300.h,
-        //   child: Column(
-        //     children: [
-        //       ClipRRect(
-        //         borderRadius: BorderRadius.only(
-        //             topLeft: Radius.circular(10.r),
-        //             topRight: Radius.circular(10.r)),
-        //         child: CachedNetworkImage(
-        //           imageUrl: itemArticle.urlToImage ?? "",
-        //           fit: BoxFit.cover,
-        //           width: double.infinity,
-        //           height: 200.h,
-        //           errorWidget: (context, url, error) {
-        //             return ClipRRect(
-        //               borderRadius: BorderRadius.circular(8.0),
-        //               child: Image.asset(
-        //                 'assets/images/img_not_found.jpg',
-        //                 fit: BoxFit.cover,
-        //                 width: double.infinity,
-        //                 height: 200.h,
-        //               ),
-        //             );
-        //           },
-        //           placeholder: (context, url) {
-        //             return ClipRRect(
-        //               borderRadius: BorderRadius.circular(8.0),
-        //               child: Image.asset(
-        //                 'assets/images/img_placeholder.jpg',
-        //                 fit: BoxFit.cover,
-        //                 width: double.infinity,
-        //                 height: 200.h,
-        //               ),
-        //             );
-        //           },
-        //         ),
-        //       ),
-        //       Expanded(
-        //         child: Container(
-        //           padding: EdgeInsets.symmetric(horizontal: 10.w),
-        //           decoration: BoxDecoration(
-        //             color: Colors.deepPurple[200],
-        //             borderRadius: BorderRadius.only(
-        //                 bottomLeft: Radius.circular(10.r),
-        //                 bottomRight: Radius.circular(10.r)),
-        //           ),
-        //           child: Column(
-        //             crossAxisAlignment: CrossAxisAlignment.start,
-        //             children: [
-        //               SizedBox(
-        //                 height: 10.h,
-        //               ),
-        //               Text(
-        //                 itemArticle.title ?? "Default Title",
-        //                 maxLines: 2,
-        //                 overflow: TextOverflow.ellipsis,
-        //                 style: TextStyle(fontSize: 13.sp, color: Colors.white),
-        //               ),
-        //               itemArticle.author == null
-        //                   ? Container()
-        //                   : Text(
-        //                       itemArticle.author ?? "Default Author",
-        //                       maxLines: 1,
-        //                       overflow: TextOverflow.ellipsis,
-        //                       style: TextStyle(
-        //                         color: Colors.white,
-        //                         fontSize: 12.sp,
-        //                       ),
-        //                     ),
-        //               Text(
-        //                 itemArticle.source?.name ?? "Default Source Name",
-        //                 style: TextStyle(
-        //                   color: Colors.white,
-        //                   fontSize: 10.sp,
-        //                 ),
-        //               ),
-        //               Text(
-        //                 strPublishedAt,
-        //                 maxLines: 1,
-        //                 overflow: TextOverflow.ellipsis,
-        //                 style: TextStyle(
-        //                   color: Colors.white,
-        //                   fontSize: 10.sp,
-        //                 ),
-        //               ),
-        //             ],
-        //           ),
-        //         ),
-        //       ),
-        //     ],
-        //   ),
-        // ),
-        );
+        ));
   }
 }

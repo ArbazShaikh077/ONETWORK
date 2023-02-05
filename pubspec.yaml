@@ -85,6 +85,10 @@ dependencies:
   #For adding custom effect of pull to refresh
   liquid_pull_to_refresh: ^3.0.1
 
+  #For shimmer animation
+  shimmer: ^2.0.0
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

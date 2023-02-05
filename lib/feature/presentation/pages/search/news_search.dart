@@ -93,12 +93,11 @@ class _SearchPageState extends State<SearchPage> {
         child: Container(
           width: double.infinity,
           padding: EdgeInsets.symmetric(
-            vertical: 24.h,
+            // vertical: 10.h,
             horizontal: 10.w,
           ),
           child: Column(
             children: [
-              SizedBox(height: 16.h),
               Expanded(
                 child: BlocBuilder<TopHeadlinesNewsBloc, TopHeadlinesState>(
                   builder: (context, state) {

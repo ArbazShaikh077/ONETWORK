@@ -8,6 +8,14 @@ ONETWORK is a Flutter-based mobile application that lets you stay informed about
 - Get a quick summary of each news article
 - Save articles for later reading
 
+## iOS
+
+<img src="screenshot/iOS_home_screen.png" width="250"> | <img src="screenshot/iOS_home_screen_scroll.png" width="250"> | <img src="screenshot/iOS_search_screen.png" width="250">
+
+## Android
+
+<img src="screenshot/android_home_screen.png" width="250"> | <img src="screenshot/android_home_screen_scroll.png" width="250"> | <img src="screenshot/android_search_screen.png" width="250">
+
 ## Summary Functionality (Coming Soon)
 
 I am actively working on a feature that will provide a summary of each news article, so you don't have to read the whole article to stay informed. This feature is currently in development, but will be available soon.

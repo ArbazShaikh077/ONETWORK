@@ -234,9 +234,7 @@ class _HomePageState extends State<HomePage> {
   ) {
     return Padding(
       padding: EdgeInsets.only(
-        top: index == 1 ? 32.h : 16.h,
-        bottom: 16.h,
-      ),
+          top: index == 1 ? 32.h : 16.h, bottom: 16.h, left: 10.w, right: 10.w),
       child: WidgetItemNews(
         itemArticle: itemArticle,
         strPublishedAt: strPublishedAt,

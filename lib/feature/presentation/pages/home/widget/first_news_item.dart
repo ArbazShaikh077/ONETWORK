@@ -25,6 +25,7 @@ class FirstNewsItem extends StatelessWidget {
         }
       },
       child: Container(
+        padding: EdgeInsets.symmetric(horizontal: 10.w),
         width: double.infinity,
         height: ScreenUtil().screenHeight / 1.7,
         decoration: BoxDecoration(
